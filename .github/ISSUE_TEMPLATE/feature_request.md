@@ -7,15 +7,6 @@ assignees: ''
 
 ---
 
----
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: llddang
-
----
-
 ## 💡 Feature Issue
 > 어떤 작업을 할 건지 작성해주세요.
 
