@@ -1,8 +1,4 @@
-import {
-  HomeContainer,
-  PokemonLogoImg,
-  ToDexLink,
-} from "@/components/features/home/Home.styles";
+import { HomeContainer, PokemonLogoImg, ToDexLink } from "./Home.styles";
 
 export default function Home() {
   return (

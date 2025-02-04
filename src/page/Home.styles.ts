@@ -1,3 +1,4 @@
+import { getBorderRadius, getFontSize } from "@/styles/theme.util";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -21,12 +22,13 @@ export const ToDexLink = styled(Link)`
   color: white;
   background-color: red;
   border: 1px solid black;
-  border-radius: 10rem;
-  padding: 0.625rem;
+  padding: 0.25rem 0.625rem;
 
-  font-size: 1.25rem;
   font-weight: 700;
   text-decoration: none;
+
+  ${getBorderRadius("lg")}
+  ${getFontSize("lg")}
 
   &:hover {
     background-color: darkred;
