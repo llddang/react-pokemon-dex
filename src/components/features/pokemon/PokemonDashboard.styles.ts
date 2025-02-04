@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 const Container = styled.main`
-  min-width: 335px;
+  min-width: 305px;
   background-color: #f8f8f8;
   box-sizing: border-box;
-  padding: 20px 30px 30px;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 30px;
 `;
 
 const Title = styled.h3`

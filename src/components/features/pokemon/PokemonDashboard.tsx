@@ -4,12 +4,15 @@ import { POKEMON_DATA } from "@/mocks";
 import { Pokemon } from "@/types/pokemon.dto";
 import { SetStateAction } from "react";
 
-export interface Props {
+export interface PokemonDashboardProps {
   pokemonIds: number[];
   setPokemonIdx: React.Dispatch<SetStateAction<number[]>>;
 }
 
-export default function PokemonDashboard({ pokemonIds, setPokemonIdx }: Props) {
+export default function PokemonDashboard({
+  pokemonIds,
+  setPokemonIdx,
+}: PokemonDashboardProps) {
   const myPokemons: Pokemon[] = POKEMON_DATA.filter((pokemon) =>
     pokemonIds.includes(pokemon.id)
   );

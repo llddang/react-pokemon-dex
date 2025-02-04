@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled(Link)`
-  width: fit-content;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,26 +28,18 @@ const Container = styled(Link)`
 
 const Image = styled.img`
   width: 100%;
-  max-width: 100px;
 `;
 
 const Name = styled.p`
   font-weight: 700;
-  ${getFontSize("lg")}
-  display: none;
-
+  ${getFontSize("md")}
   ${({ theme }) => theme.media.tablet} {
-    display: block;
+    ${getFontSize("lg")}
   }
 `;
 
 const Description = styled.span`
   ${getFontSize("md")}
-  display: none;
-
-  ${({ theme }) => theme.media.laptop} {
-    display: block;
-  }
 `;
 
 const Button = styled.button`
