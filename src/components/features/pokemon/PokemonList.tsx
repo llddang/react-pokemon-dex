@@ -28,6 +28,7 @@ export default function PokemonList({
     <PokemonListS.Container>
       {POKEMON_DATA.map((pokemon) => (
         <PokemonCard
+          key={pokemon.id}
           pokemon={pokemon}
           cardType="ADD"
           onActionClick={handleAddPokemonClick}
