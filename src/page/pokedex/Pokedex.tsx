@@ -1,7 +1,7 @@
 import PokemonDashboard from "@/components/features/pokemon/PokemonDashboard";
 import PokemonList from "@/components/features/pokemon/PokemonList";
+import { PokedexContainer } from "@/page/pokedex/Pokedex.styles";
 import { useState } from "react";
-import styled from "styled-components";
 
 export default function Pokedex() {
   const [myPokemonIds, setMyPokemonIds] = useState<number[]>([]);
@@ -16,10 +16,3 @@ export default function Pokedex() {
     </PokedexContainer>
   );
 }
-
-const PokedexContainer = styled.div`
-  padding: 30px;
-  > *:not(:last-child) {
-    margin-bottom: 30px;
-  }
-`;

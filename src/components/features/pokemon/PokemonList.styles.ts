@@ -4,7 +4,7 @@ const Container = styled.main`
   min-width: 305px;
   background-color: #f8f8f8;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 30px;
   border-radius: 30px;
 
   display: grid;

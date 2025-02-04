@@ -1,7 +1,7 @@
 import { POKEMON_DATA } from "@/mocks";
+import PokemonDetailS from "@/page/pokemon/detail/PokemonDetail.styles";
 import { useEffect } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export default function PokemonDetail() {
   const pokemonId = Number(useParams().id);
@@ -24,11 +24,11 @@ export default function PokemonDetail() {
 
   return (
     <PokemonDetailS.Container>
-      <img src={pokemon?.imageUrl} alt={pokemon?.name} />
-      <h3>{pokemon?.name}</h3>
+      <PokemonDetailS.Image src={pokemon?.imageUrl} alt={pokemon?.name} />
+      <PokemonDetailS.Name>{pokemon?.name}</PokemonDetailS.Name>
       <p>타입: {pokemon?.types.join(", ")}</p>
       <p>{pokemon?.description}</p>
-      <Link
+      <PokemonDetailS.GLink
         to=".."
         onClick={(e) => {
           e.preventDefault();
@@ -36,13 +36,7 @@ export default function PokemonDetail() {
         }}
       >
         뒤돌아가기
-      </Link>
+      </PokemonDetailS.GLink>
     </PokemonDetailS.Container>
   );
 }
-
-const Container = styled.main``;
-
-const PokemonDetailS = {
-  Container,
-};
