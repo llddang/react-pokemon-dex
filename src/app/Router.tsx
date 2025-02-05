@@ -1,6 +1,6 @@
 import Home from "@/page/Home";
-import Pokedex from "@/page/pokedex/Pokedex";
 import PokemonDetail from "@/page/pokemon/detail/PokemonDetail";
+import Pokemon from "@/page/pokemon/Pokemon";
 import {
   createBrowserRouter,
   RouteObject,
@@ -13,8 +13,8 @@ const publicRoutes: RouteObject[] = [
     element: <Home />,
   },
   {
-    path: "/pokedex",
-    element: <Pokedex />,
+    path: "/pokemon",
+    element: <Pokemon />,
   },
   {
     path: "/pokemon/detail/:id",

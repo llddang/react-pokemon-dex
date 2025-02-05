@@ -1,9 +1,9 @@
-import ButtonLink from "@/components/common/ButtonLink";
-import Typography from "@/components/common/Typography";
-import { POKEMON_DATA } from "@/mocks";
 import { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import ButtonLink from "@/components/common/ButtonLink";
+import Typography from "@/components/common/Typography";
+import { POKEMON_DATA } from "@/mocks";
 
 export default function PokemonDetail() {
   const pokemonId = Number(useParams().id);

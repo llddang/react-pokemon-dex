@@ -1,9 +1,9 @@
-import PokemonDashboard from "@/components/features/pokemon/PokemonDashboard";
-import PokemonList from "@/components/features/pokemon/PokemonList";
 import { useState } from "react";
 import styled from "styled-components";
+import PokemonDashboard from "@/components/features/pokemon/PokemonDashboard";
+import PokemonList from "@/components/features/pokemon/PokemonList";
 
-export default function Pokedex() {
+export default function Pokemon() {
   const [myPokemonIds, setMyPokemonIds] = useState<number[]>([]);
 
   return (
