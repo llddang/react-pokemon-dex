@@ -2,7 +2,7 @@ import ButtonLink from "@/components/common/ButtonLink";
 import Typography from "@/components/common/Typography";
 import { POKEMON_DATA } from "@/mocks";
 import { useEffect } from "react";
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 export default function PokemonDetail() {
@@ -10,10 +10,11 @@ export default function PokemonDetail() {
   const pokemon = POKEMON_DATA.find((pokemon) => pokemon.id === pokemonId);
 
   const { state } = useLocation();
+  const navigate = useNavigate();
 
   const handleBack = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    return <Navigate to="/pokedex" />;
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -25,7 +26,8 @@ export default function PokemonDetail() {
   }, [state]);
 
   if (!pokemon) {
-    return <Navigate to="/pokedex" />;
+    navigate(-1);
+    return <></>;
   }
 
   return (
