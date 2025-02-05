@@ -1,3 +1,4 @@
+import media from "@/styles/media";
 import { getBorderRadius, getFontSize } from "@/styles/theme.util";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -21,9 +22,9 @@ const Container = styled(Link)`
     box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px;
     transform: translateY(-10px);
   }
-  ${({ theme }) => theme.media.tablet} {
-    gap: 8px;
-  }
+  ${media.md`
+    gap:8px;
+  `}
 `;
 
 const Image = styled.img`
@@ -33,9 +34,9 @@ const Image = styled.img`
 const Name = styled.p`
   font-weight: 700;
   ${getFontSize("md")}
-  ${({ theme }) => theme.media.tablet} {
+  ${media.md`
     ${getFontSize("lg")}
-  }
+  `}
 `;
 
 const Description = styled.span`

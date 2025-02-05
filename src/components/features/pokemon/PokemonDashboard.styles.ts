@@ -1,3 +1,4 @@
+import media from "@/styles/media";
 import styled from "styled-components";
 
 const Container = styled.main`
@@ -24,9 +25,9 @@ const List = styled.ul`
 
   justify-items: center;
 
-  ${({ theme }) => theme.media.laptop} {
+  ${media.lg`
     grid-template-columns: repeat(6, 1fr);
-  }
+  `}
 `;
 
 const EmptyImage = styled.img`
