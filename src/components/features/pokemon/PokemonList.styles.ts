@@ -5,7 +5,7 @@ const Container = styled.main`
   background-color: #f8f8f8;
   box-sizing: border-box;
   padding: 30px;
-  border-radius: 30px;
+  border-radius: var(--radius-lg);
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -14,7 +14,6 @@ const Container = styled.main`
   background-color: #f0f0f0;
   padding: 20px;
   border: 1px solid #dddddd;
-  border-radius: 10px;
 `;
 
 const PokemonListS = {

@@ -32,7 +32,7 @@ const GLink = styled(Link)`
   border: none;
   background-color: rgb(255, 0, 0);
   color: rgb(255, 255, 255);
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
 `;
 
 const PokemonDetailS = {

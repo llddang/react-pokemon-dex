@@ -7,7 +7,7 @@ const Container = styled.main`
   background-color: #f8f8f8;
   box-sizing: border-box;
   padding: 20px;
-  border-radius: 30px;
+  border-radius: var(--radius-lg);
 `;
 
 const Title = styled(Typography).attrs({
@@ -36,7 +36,7 @@ const EmptyImage = styled.img`
   max-width: 100px;
 
   border: 2px dotted #bbb;
-  border-radius: 30px;
+  border-radius: var(--radius-lg);
   padding: 20px;
 
   box-sizing: border-box;

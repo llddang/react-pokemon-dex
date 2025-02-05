@@ -1,5 +1,4 @@
 import media from "@/styles/media";
-import { getBorderRadius } from "@/styles/theme.util";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -12,7 +11,7 @@ const Container = styled(Link)`
 
   border: 1px solid rgb(221, 221, 221);
   background-color: white;
-  ${getBorderRadius("lg")}
+  border-radius: var(--radius-xl);
   padding: 10px 16px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 8px;
   -webkit-transition: 0.3s ease;
@@ -39,7 +38,7 @@ const Button = styled.button`
   border: none;
   background-color: rgb(255, 0, 0);
   color: rgb(255, 255, 255);
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
 `;
 
 const PokemonCardS = {
