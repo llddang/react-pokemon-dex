@@ -29,17 +29,17 @@ const buttonStyles = {
   },
   sizes: {
     sm: css`
-      padding: 0.125rem 0.375rem;
+      padding: 4px 8px;
       font-size: 0.875rem;
       border-radius: var(--radius-sm);
     `,
     md: css`
-      padding: 0.125rem 0.75rem;
+      padding: 4px 12px;
       font-size: 1rem;
       border-radius: var(--radius-lg);
     `,
     lg: css`
-      padding: 0.25rem 1rem;
+      padding: 4px 16px;
       font-size: 1.25rem;
       font-weight: 600;
       ${media.md`
