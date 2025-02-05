@@ -1,5 +1,5 @@
 import media from "@/styles/media";
-import { getBorderRadius, getFontSize } from "@/styles/theme.util";
+import { getBorderRadius } from "@/styles/theme.util";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -31,18 +31,6 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const Name = styled.p`
-  font-weight: 700;
-  ${getFontSize("md")}
-  ${media.md`
-    ${getFontSize("lg")}
-  `}
-`;
-
-const Description = styled.span`
-  ${getFontSize("md")}
-`;
-
 const Button = styled.button`
   margin-top: 10px;
   padding: 5px 10px;
@@ -57,8 +45,6 @@ const Button = styled.button`
 const PokemonCardS = {
   Container,
   Image,
-  Name,
-  Description,
   Button,
 };
 

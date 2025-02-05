@@ -1,4 +1,4 @@
-import { getFontSize } from "@/styles/theme.util";
+import Typography from "@/components/common/Typography";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -18,9 +18,9 @@ const Image = styled.img`
   max-width: 80%;
 `;
 
-const Name = styled.h3`
-  ${getFontSize("xl")}
-  font-weight: bold;
+const Name = styled(Typography).attrs({
+  $variant: "h1" as const,
+})`
   color: rgb(255, 0, 0);
 `;
 

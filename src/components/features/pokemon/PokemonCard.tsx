@@ -1,3 +1,4 @@
+import Typography from "@/components/common/Typography";
 import PokemonCardS from "@/components/features/pokemon/PokemonCard.styles";
 import { Pokemon } from "@/types/pokemon.dto";
 import { useNavigate } from "react-router-dom";
@@ -36,10 +37,8 @@ export default function PokemonCard({
       onClick={handleGoDetailButtonClick}
     >
       <PokemonCardS.Image src={pokemon.imageUrl} alt={pokemon.name} />
-      <PokemonCardS.Name>{pokemon.name}</PokemonCardS.Name>
-      <PokemonCardS.Description>
-        No. {formatNumber(pokemon.id)}
-      </PokemonCardS.Description>
+      <Typography $variant="h3">{pokemon.name}</Typography>
+      <Typography>No. {formatNumber(pokemon.id)}</Typography>
       <PokemonCardS.Button onClick={handleButtonClick}>
         {cardType === "ADD" ? "추가" : "삭제"}
       </PokemonCardS.Button>

@@ -1,3 +1,4 @@
+import Typography from "@/components/common/Typography";
 import media from "@/styles/media";
 import styled from "styled-components";
 
@@ -9,9 +10,9 @@ const Container = styled.main`
   border-radius: 30px;
 `;
 
-const Title = styled.h3`
-  font-size: 1.5em;
-  font-weight: bold;
+const Title = styled(Typography).attrs({
+  $variant: "h1" as const,
+})`
   text-align: center;
   color: red;
 
