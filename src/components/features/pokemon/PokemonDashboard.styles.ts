@@ -1,4 +1,3 @@
-import Typography from "@/components/common/Typography";
 import media from "@/styles/media";
 import styled from "styled-components";
 
@@ -8,15 +7,12 @@ const Container = styled.main`
   box-sizing: border-box;
   padding: 20px;
   border-radius: var(--radius-lg);
-`;
 
-const Title = styled(Typography).attrs({
-  $variant: "h1" as const,
-})`
-  text-align: center;
-  color: red;
-
-  margin: 16px;
+  > p {
+    text-align: center;
+    color: red;
+    margin: 16px;
+  }
 `;
 
 const List = styled.ul`
@@ -46,7 +42,6 @@ const EmptyImage = styled.img`
 
 const PokemonDashboardS = {
   Container,
-  Title,
   List,
   EmptyImage,
 };

@@ -1,7 +1,7 @@
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
-import PokemonListS from "@/components/features/pokemon/PokemonList.styles";
 import { POKEMON_DATA } from "@/mocks";
 import { SetStateAction } from "react";
+import styled from "styled-components";
 
 export interface PokemonListProps {
   pokemonIds: number[];
@@ -25,7 +25,7 @@ export default function PokemonList({
   }
 
   return (
-    <PokemonListS.Container>
+    <Container>
       {POKEMON_DATA.map((pokemon) => (
         <PokemonCard
           key={pokemon.id}
@@ -34,6 +34,22 @@ export default function PokemonList({
           onActionClick={handleAddPokemonClick}
         />
       ))}
-    </PokemonListS.Container>
+    </Container>
   );
 }
+
+const Container = styled.main`
+  min-width: 305px;
+  background-color: #f8f8f8;
+  box-sizing: border-box;
+  padding: 30px;
+  border-radius: var(--radius-lg);
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  justify-items: center;
+  gap: 20px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #dddddd;
+`;

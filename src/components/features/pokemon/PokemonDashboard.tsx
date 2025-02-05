@@ -1,3 +1,4 @@
+import Typography from "@/components/common/Typography";
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
 import PokemonDashboardS from "@/components/features/pokemon/PokemonDashboard.styles";
 import { POKEMON_DATA } from "@/mocks";
@@ -27,7 +28,7 @@ export default function PokemonDashboard({
 
   return (
     <PokemonDashboardS.Container>
-      <PokemonDashboardS.Title>나만의 포켓몬</PokemonDashboardS.Title>
+      <Typography $variant="h1">나만의 포켓몬</Typography>
       <PokemonDashboardS.List>
         {myPokemons.map((pokemon) => (
           <PokemonCard
