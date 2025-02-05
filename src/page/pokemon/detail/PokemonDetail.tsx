@@ -1,19 +1,19 @@
 import ButtonLink from "@/components/common/ButtonLink";
+import Typography from "@/components/common/Typography";
 import { POKEMON_DATA } from "@/mocks";
-import PokemonDetailS from "@/page/pokemon/detail/PokemonDetail.styles";
 import { useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useLocation, useParams } from "react-router-dom";
+import styled from "styled-components";
 
 export default function PokemonDetail() {
   const pokemonId = Number(useParams().id);
   const pokemon = POKEMON_DATA.find((pokemon) => pokemon.id === pokemonId);
 
   const { state } = useLocation();
-  const navigate = useNavigate();
 
   const handleBack = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    navigate(-1);
+    return <Navigate to="/pokedex" />;
   };
 
   useEffect(() => {
@@ -24,12 +24,16 @@ export default function PokemonDetail() {
     };
   }, [state]);
 
+  if (!pokemon) {
+    return <Navigate to="/pokedex" />;
+  }
+
   return (
-    <PokemonDetailS.Container>
-      <PokemonDetailS.Image src={pokemon?.imageUrl} alt={pokemon?.name} />
-      <PokemonDetailS.Name>{pokemon?.name}</PokemonDetailS.Name>
-      <p>타입: {pokemon?.types.join(", ")}</p>
-      <p>{pokemon?.description}</p>
+    <Container>
+      <img src={pokemon.imageUrl} alt={pokemon.name} />
+      <Typography $variant="h3">{pokemon.name}</Typography>
+      <p>타입: {pokemon.types.join(", ")}</p>
+      <p>{pokemon.description}</p>
       <ButtonLink
         href=".."
         $color="secondary"
@@ -39,6 +43,26 @@ export default function PokemonDetail() {
       >
         뒤돌아가기
       </ButtonLink>
-    </PokemonDetailS.Container>
+    </Container>
   );
 }
+
+const Container = styled.main`
+  width: fit-content;
+  margin: 10% auto 0;
+  padding: 20px;
+  text-align: center;
+
+  & > img {
+    width: 300px;
+    max-width: 80%;
+  }
+
+  ${Typography} {
+    color: red;
+  }
+
+  > *:not(:last-child) {
+    margin-bottom: 10px;
+  }
+`;
