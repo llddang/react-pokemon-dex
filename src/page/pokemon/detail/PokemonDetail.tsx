@@ -1,7 +1,9 @@
-import { POKEMON_DATA } from "@/mocks";
-import PokemonDetailS from "@/page/pokemon/detail/PokemonDetail.styles";
 import { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
+import ButtonLink from "@/components/common/ButtonLink";
+import Typography from "@/components/common/Typography";
+import { POKEMON_DATA } from "@/mocks";
 
 export default function PokemonDetail() {
   const pokemonId = Number(useParams().id);
@@ -10,7 +12,8 @@ export default function PokemonDetail() {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const handleBack = () => {
+  const handleBack = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     navigate(-1);
   };
 
@@ -22,21 +25,46 @@ export default function PokemonDetail() {
     };
   }, [state]);
 
+  if (!pokemon) {
+    navigate(-1);
+    return <></>;
+  }
+
   return (
-    <PokemonDetailS.Container>
-      <PokemonDetailS.Image src={pokemon?.imageUrl} alt={pokemon?.name} />
-      <PokemonDetailS.Name>{pokemon?.name}</PokemonDetailS.Name>
-      <p>타입: {pokemon?.types.join(", ")}</p>
-      <p>{pokemon?.description}</p>
-      <PokemonDetailS.GLink
-        to=".."
-        onClick={(e) => {
-          e.preventDefault();
-          handleBack();
-        }}
+    <Container>
+      <img src={pokemon.imageUrl} alt={pokemon.name} />
+      <Typography $variant="h3">{pokemon.name}</Typography>
+      <p>타입: {pokemon.types.join(", ")}</p>
+      <p>{pokemon.description}</p>
+      <ButtonLink
+        href=".."
+        $color="secondary"
+        $size="sm"
+        $rounded="xl"
+        onClick={handleBack}
       >
         뒤돌아가기
-      </PokemonDetailS.GLink>
-    </PokemonDetailS.Container>
+      </ButtonLink>
+    </Container>
   );
 }
+
+const Container = styled.main`
+  width: fit-content;
+  margin: 10% auto 0;
+  padding: 20px;
+  text-align: center;
+
+  & > img {
+    width: 300px;
+    max-width: 80%;
+  }
+
+  ${Typography} {
+    color: red;
+  }
+
+  > *:not(:last-child) {
+    margin-bottom: 10px;
+  }
+`;

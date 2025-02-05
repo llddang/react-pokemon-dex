@@ -1,3 +1,4 @@
+import media from "@/styles/media";
 import styled from "styled-components";
 
 const Container = styled.main`
@@ -5,16 +6,13 @@ const Container = styled.main`
   background-color: #f8f8f8;
   box-sizing: border-box;
   padding: 20px;
-  border-radius: 30px;
-`;
+  border-radius: var(--radius-lg);
 
-const Title = styled.h3`
-  font-size: 1.5em;
-  font-weight: bold;
-  text-align: center;
-  color: red;
-
-  margin: 16px;
+  > p {
+    text-align: center;
+    color: red;
+    margin: 16px;
+  }
 `;
 
 const List = styled.ul`
@@ -24,9 +22,9 @@ const List = styled.ul`
 
   justify-items: center;
 
-  ${({ theme }) => theme.media.laptop} {
+  ${media.lg`
     grid-template-columns: repeat(6, 1fr);
-  }
+  `}
 `;
 
 const EmptyImage = styled.img`
@@ -34,7 +32,7 @@ const EmptyImage = styled.img`
   max-width: 100px;
 
   border: 2px dotted #bbb;
-  border-radius: 30px;
+  border-radius: var(--radius-lg);
   padding: 20px;
 
   box-sizing: border-box;
@@ -44,7 +42,6 @@ const EmptyImage = styled.img`
 
 const PokemonDashboardS = {
   Container,
-  Title,
   List,
   EmptyImage,
 };

@@ -1,12 +1,10 @@
-import { breakpoints, fontSize, borderRadius } from "@/styles/theme.config";
-
 export const theme = {
-  breakpoints,
-  fontSize,
-  borderRadius,
-  media: {
-    mobile: `@media screen and (min-width: ${breakpoints.mobile})`,
-    tablet: `@media screen and (min-width: ${breakpoints.tablet})`,
-    laptop: `@media screen and (min-width: ${breakpoints.laptop})`,
+  colors: {
+    primary: "#ff0000",
+    secondary: "#8f9fb0",
+    primaryHover: "#8b0000",
+    secondaryHover: "#708090",
   },
-};
+} as const;
+
+export type ThemeColors = keyof typeof theme.colors;
