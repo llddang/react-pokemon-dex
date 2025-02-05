@@ -30,8 +30,8 @@ const buttonStyles = {
   },
   sizes: {
     sm: css`
-      padding: 0.125rem 0.5rem;
-      font-size: 0.75rem;
+      padding: 0.125rem 0.375rem;
+      font-size: 0.875rem;
     `,
     md: css`
       padding: 0.125rem 0.75rem;

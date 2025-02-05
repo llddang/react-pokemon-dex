@@ -1,3 +1,4 @@
+import ButtonLink from "@/components/common/ButtonLink";
 import { POKEMON_DATA } from "@/mocks";
 import PokemonDetailS from "@/page/pokemon/detail/PokemonDetail.styles";
 import { useEffect } from "react";
@@ -28,15 +29,17 @@ export default function PokemonDetail() {
       <PokemonDetailS.Name>{pokemon?.name}</PokemonDetailS.Name>
       <p>타입: {pokemon?.types.join(", ")}</p>
       <p>{pokemon?.description}</p>
-      <PokemonDetailS.GLink
-        to=".."
+      <ButtonLink
+        href=".."
+        $color="secondary"
+        $size="sm"
         onClick={(e) => {
           e.preventDefault();
           handleBack();
         }}
       >
         뒤돌아가기
-      </PokemonDetailS.GLink>
+      </ButtonLink>
     </PokemonDetailS.Container>
   );
 }
