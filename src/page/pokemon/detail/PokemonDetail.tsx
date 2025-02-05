@@ -11,7 +11,8 @@ export default function PokemonDetail() {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const handleBack = () => {
+  const handleBack = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     navigate(-1);
   };
 
@@ -33,10 +34,8 @@ export default function PokemonDetail() {
         href=".."
         $color="secondary"
         $size="sm"
-        onClick={(e) => {
-          e.preventDefault();
-          handleBack();
-        }}
+        $rounded="xl"
+        onClick={handleBack}
       >
         뒤돌아가기
       </ButtonLink>

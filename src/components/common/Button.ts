@@ -4,7 +4,6 @@ import styled, { css } from "styled-components";
 
 const buttonStyles = {
   base: css`
-    border-radius: var(--radius-xl);
     cursor: pointer;
     transition: all 0.2s;
   `,
@@ -32,10 +31,12 @@ const buttonStyles = {
     sm: css`
       padding: 0.125rem 0.375rem;
       font-size: 0.875rem;
+      border-radius: var(--radius-sm);
     `,
     md: css`
       padding: 0.125rem 0.75rem;
       font-size: 1rem;
+      border-radius: var(--radius-lg);
     `,
     lg: css`
       padding: 0.25rem 1rem;
@@ -44,6 +45,21 @@ const buttonStyles = {
       ${media.md`
           font-size: 1.5rem;
       `}
+      border-radius: var(--radius-xl);
+    `,
+  },
+  rounded: {
+    sm: css`
+      border-radius: var(--radius-sm);
+    `,
+    md: css`
+      border-radius: var(--radius-md);
+    `,
+    lg: css`
+      border-radius: var(--radius-lg);
+    `,
+    xl: css`
+      border-radius: var(--radius-xl);
     `,
   },
 } as const;
@@ -51,6 +67,7 @@ const buttonStyles = {
 export interface ButtonProps {
   $variant?: keyof typeof buttonStyles.variants;
   $size?: keyof typeof buttonStyles.sizes;
+  $rounded?: keyof typeof buttonStyles.rounded;
   $color?: ThemeColors;
 }
 
@@ -59,5 +76,6 @@ const Button = styled.button<ButtonProps>`
   ${({ $variant = "solid", $color = "primary" }) =>
     buttonStyles.variants[$variant]($color)}
   ${({ $size = "md" }) => buttonStyles.sizes[$size]}
+  ${({ $rounded, $size = "md" }) => buttonStyles.rounded[$rounded || $size]}
 `;
 export default Button;
