@@ -5,24 +5,45 @@ import Typography from "@/components/common/Typography";
 import media from "@/styles/media";
 
 import { Pokemon } from "@/types/pokemon.dto";
+import { useContext } from "react";
+import {
+  PokemonsContext,
+  PokemonsDispatchContext,
+} from "@/contexts/pokemon.context";
 
 interface PokemonCardProps {
-  pokemon: Omit<Pokemon, "description" | "types">;
+  pokemon: Pokemon;
   cardType: "ADD" | "DELETE";
-  onActionClick: (id: number) => void;
 }
 
-export default function PokemonCard({
-  pokemon,
-  cardType,
-  onActionClick,
-}: PokemonCardProps) {
+export default function PokemonCard({ pokemon, cardType }: PokemonCardProps) {
+  const pokemons = useContext(PokemonsContext);
+  const dispatch = useContext(PokemonsDispatchContext);
   const navigate = useNavigate();
 
   function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     e.stopPropagation();
-    onActionClick(pokemon.id);
+
+    switch (cardType) {
+      case "ADD":
+        return addPokemons();
+      case "DELETE":
+        return deletePokemons();
+      default:
+        throw Error("Unknown action");
+    }
+  }
+
+  function addPokemons() {
+    if (pokemons.length >= 6) return alert("더 이상 선택할 수 없습니다.");
+    if (pokemons.find((p) => p.id === pokemon.id))
+      return alert("이미 선택된 포켓몬입니다.");
+
+    dispatch({ type: "ADD", pokemon });
+  }
+  function deletePokemons() {
+    dispatch({ type: "DELETE", id: pokemon.id });
   }
 
   function handleGoDetailButtonClick(e: React.MouseEvent<HTMLAnchorElement>) {

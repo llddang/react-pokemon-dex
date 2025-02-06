@@ -1,38 +1,12 @@
+import styled from "styled-components";
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
 import { POKEMON_DATA } from "@/mocks";
-import { SetStateAction } from "react";
-import styled from "styled-components";
 
-export interface PokemonListProps {
-  pokemonIds: number[];
-  setPokemonIdx: React.Dispatch<SetStateAction<number[]>>;
-}
-
-export default function PokemonList({
-  pokemonIds,
-  setPokemonIdx,
-}: PokemonListProps) {
-  function handleAddPokemonClick(id: number) {
-    if (pokemonIds.length >= 6) {
-      alert("noooooooo");
-      return;
-    }
-    if (pokemonIds.includes(id)) {
-      alert("duplicated...");
-      return;
-    }
-    setPokemonIdx((prev) => [...prev, id]);
-  }
-
+export default function PokemonList() {
   return (
     <Container>
       {POKEMON_DATA.map((pokemon) => (
-        <PokemonCard
-          key={pokemon.id}
-          pokemon={pokemon}
-          cardType="ADD"
-          onActionClick={handleAddPokemonClick}
-        />
+        <PokemonCard key={pokemon.id} pokemon={pokemon} cardType="ADD" />
       ))}
     </Container>
   );
