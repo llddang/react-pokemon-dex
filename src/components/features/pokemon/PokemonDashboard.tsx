@@ -1,42 +1,23 @@
 import Typography from "@/components/common/Typography";
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
 import PokemonDashboardS from "@/components/features/pokemon/PokemonDashboard.styles";
-import { POKEMON_DATA } from "@/mocks";
-import { Pokemon } from "@/types/pokemon.dto";
-import { SetStateAction } from "react";
+import { PokemonsContext } from "@/contexts/pokemon.context";
+import { useContext } from "react";
 
-export interface PokemonDashboardProps {
-  pokemonIds: number[];
-  setPokemonIdx: React.Dispatch<SetStateAction<number[]>>;
-}
+export default function PokemonDashboard() {
+  const pokemons = useContext(PokemonsContext);
 
-export default function PokemonDashboard({
-  pokemonIds,
-  setPokemonIdx,
-}: PokemonDashboardProps) {
-  const myPokemons: Pokemon[] = POKEMON_DATA.filter((pokemon) =>
-    pokemonIds.includes(pokemon.id)
-  );
   const restPokemon = Array.from(
-    { length: 6 - pokemonIds.length },
+    { length: 6 - pokemons.length },
     (_, idx) => idx
   );
-
-  const handleDeleteButtonClick = (deleteId: number) => {
-    setPokemonIdx((prev) => prev.filter((id) => id !== deleteId));
-  };
 
   return (
     <PokemonDashboardS.Container>
       <Typography $variant="h1">나만의 포켓몬</Typography>
       <PokemonDashboardS.List>
-        {myPokemons.map((pokemon) => (
-          <PokemonCard
-            key={pokemon.id}
-            pokemon={pokemon}
-            cardType="DELETE"
-            onActionClick={handleDeleteButtonClick}
-          />
+        {pokemons.map((pokemon) => (
+          <PokemonCard key={pokemon.id} pokemon={pokemon} cardType="DELETE" />
         ))}
         {restPokemon.map((id) => (
           <PokemonDashboardS.EmptyImage
