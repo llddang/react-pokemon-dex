@@ -1,15 +1,13 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "@/components/common/Button";
 import Typography from "@/components/common/Typography";
 import media from "@/styles/media";
+import { RootState } from "@/store/redux";
+import { addPokemon, deletePokemon } from "@/store/pokemon.slice";
 
 import { Pokemon } from "@/types/pokemon.dto";
-import { useContext } from "react";
-import {
-  PokemonsContext,
-  PokemonsDispatchContext,
-} from "@/contexts/pokemon.context";
 
 interface PokemonCardProps {
   pokemon: Pokemon;
@@ -17,8 +15,8 @@ interface PokemonCardProps {
 }
 
 export default function PokemonCard({ pokemon, cardType }: PokemonCardProps) {
-  const pokemons = useContext(PokemonsContext);
-  const dispatch = useContext(PokemonsDispatchContext);
+  const pokemons = useSelector((state: RootState) => state.pokemon);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
@@ -40,10 +38,10 @@ export default function PokemonCard({ pokemon, cardType }: PokemonCardProps) {
     if (pokemons.find((p) => p.id === pokemon.id))
       return alert("이미 선택된 포켓몬입니다.");
 
-    dispatch({ type: "ADD", pokemon });
+    dispatch(addPokemon(pokemon));
   }
   function deletePokemons() {
-    dispatch({ type: "DELETE", id: pokemon.id });
+    dispatch(deletePokemon(pokemon.id));
   }
 
   function handleGoDetailButtonClick(e: React.MouseEvent<HTMLAnchorElement>) {

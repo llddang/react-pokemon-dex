@@ -1,11 +1,11 @@
+import { useSelector } from "react-redux";
 import Typography from "@/components/common/Typography";
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
 import PokemonDashboardS from "@/components/features/pokemon/PokemonDashboard.styles";
-import { PokemonsContext } from "@/contexts/pokemon.context";
-import { useContext } from "react";
+import { RootState } from "@/store/redux";
 
 export default function PokemonDashboard() {
-  const pokemons = useContext(PokemonsContext);
+  const pokemons = useSelector((state: RootState) => state.pokemon);
 
   const restPokemon = Array.from(
     { length: 6 - pokemons.length },
