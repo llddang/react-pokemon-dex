@@ -1,11 +1,11 @@
 import React from "react";
 
-interface ChipCardProps extends React.HTMLAttributes<HTMLOrSVGElement> {
+interface CardChipProps extends React.HTMLAttributes<HTMLOrSVGElement> {
   url: string;
   pokemonId: number;
 }
 
-export default function ChipCard({ url, pokemonId, ...props }: ChipCardProps) {
+export default function CardChip({ url, pokemonId, ...props }: CardChipProps) {
   const outerPath = `M 0,0 H 180 V 200 H 0 V 0 Z`;
   const innerPath = `
     M 20,10 H 40
