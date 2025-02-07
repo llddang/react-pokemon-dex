@@ -1,21 +1,12 @@
-import styled from "styled-components";
-import PokemonDashboard from "@/components/features/pokemon/PokemonDashboard";
+import PokemonPageS from "@/page/pokemon/Pokemon.styled";
 import PokemonList from "@/components/features/pokemon/PokemonList";
 
 export default function Pokemon() {
   return (
-    <Container>
-      <PokemonDashboard />
+    <PokemonPageS.Container>
+      <PokemonPageS.Title>choose your Pokémon</PokemonPageS.Title>
+      <hr style={{ width: "100%" }} color="4ceef9" />
       <PokemonList />
-    </Container>
+    </PokemonPageS.Container>
   );
 }
-
-const Container = styled.div`
-  max-width: 1200px;
-  margin: auto;
-  padding: 30px;
-  > *:not(:last-child) {
-    margin-bottom: 30px;
-  }
-`;
