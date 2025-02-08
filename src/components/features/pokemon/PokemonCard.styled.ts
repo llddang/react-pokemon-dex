@@ -5,7 +5,7 @@ import media from "@/styles/media";
 import CardChip from "@/components/common/CardChip";
 
 interface ContainerProps {
-  $isSelected: boolean;
+  $isFocused: boolean;
 }
 const Container = styled(Link)<ContainerProps>`
   width: 130px;
@@ -15,7 +15,7 @@ const Container = styled(Link)<ContainerProps>`
 
   ${media.sm` width: 100px `}
   ${(props) =>
-    props.$isSelected &&
+    props.$isFocused &&
     `
       transform: scale(110%);
       && > svg {  

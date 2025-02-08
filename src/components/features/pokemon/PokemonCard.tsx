@@ -8,9 +8,10 @@ interface PokemonCardProps {
   pokemon: Pokemon;
   cardType: "ADD" | "DELETE";
   isSelected: boolean;
+  isFocused: boolean;
 }
 
-export default function PokemonCard({ pokemon, isSelected }: PokemonCardProps) {
+export default function PokemonCard({ pokemon, isFocused }: PokemonCardProps) {
   const navigate = useNavigate();
 
   function handleGoDetailButtonClick(e: React.MouseEvent<HTMLAnchorElement>) {
@@ -23,7 +24,7 @@ export default function PokemonCard({ pokemon, isSelected }: PokemonCardProps) {
 
   return (
     <PokemonCardS.Container
-      $isSelected={isSelected}
+      $isFocused={isFocused}
       to={`/pokemon/detail/${pokemon.id}`}
       onClick={handleGoDetailButtonClick}
     >

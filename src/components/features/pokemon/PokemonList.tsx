@@ -3,6 +3,9 @@ import PokemonListS from "@/components/features/pokemon/PokemonList.styled";
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
 import { useGridColumnCount } from "@/lib/hooks/useGridColumCount";
 import { POKEMON_DATA } from "@/mocks";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/redux";
+import { addPokemon, deletePokemon } from "@/store/pokemon.slice";
 
 export interface PokemonListProps {
   focusedId: number;
@@ -15,7 +18,15 @@ export default function PokemonList({
 }: PokemonListProps) {
   const { gridRef, columnCount } = useGridColumnCount();
   const innerContainerRef = useRef<HTMLDivElement>(null);
-  const maxIdx = POKEMON_DATA.length;
+  const chosePokemon = useSelector((state: RootState) => state.pokemon);
+  const dispatch = useDispatch();
+
+  const pokemonsWithSelect = POKEMON_DATA.map((p) =>
+    chosePokemon.some((cp) => cp.id === p.id)
+      ? { ...p, isSelected: true }
+      : { ...p, isSelected: false }
+  );
+  const maxIdx = pokemonsWithSelect.length;
 
   function handleArrowKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     e.preventDefault();
@@ -39,10 +50,21 @@ export default function PokemonList({
       case "ArrowDown":
         return setFocusedId((prev) => (prev + columnCount) % maxIdx || maxIdx);
       case "Enter":
-        // TODO: 뭔가 하기.
-        break;
+        return storePokemon();
       default:
         break;
+    }
+  }
+
+  function storePokemon() {
+    const focusedPokemon = pokemonsWithSelect.find((p) => p.id === focusedId);
+    if (!focusedPokemon) return;
+
+    if (!focusedPokemon.isSelected) {
+      if (chosePokemon.length >= 6) return alert("더 이상 선택할 수 없습니다.");
+      return dispatch(addPokemon(focusedPokemon));
+    } else {
+      return dispatch(deletePokemon(focusedPokemon.id));
     }
   }
 
@@ -69,15 +91,15 @@ export default function PokemonList({
       ref={innerContainerRef}
       onKeyDown={handleArrowKeyDown}
       onBlur={() => innerContainerRef.current?.focus()}
-      onMouseMove={handleCardHover}
     >
-      <PokemonListS.Grid ref={gridRef}>
-        {POKEMON_DATA.map((pokemon) => (
+      <PokemonListS.Grid ref={gridRef} onMouseMove={handleCardHover}>
+        {pokemonsWithSelect.map((pokemon) => (
           <PokemonCard
             key={pokemon.id}
             pokemon={pokemon}
             cardType="ADD"
-            isSelected={focusedId === pokemon.id}
+            isSelected={pokemon.isSelected}
+            isFocused={focusedId === pokemon.id}
           />
         ))}
       </PokemonListS.Grid>
