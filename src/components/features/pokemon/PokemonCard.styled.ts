@@ -23,6 +23,11 @@ const Container = styled(Link)<ContainerProps>`
         box-shadow: #4ceef9 2px 4px 12px;
       }
       `};
+
+  @media (max-height: 680px) {
+    width: 80px;
+    height: 120px;
+  }
 `;
 
 const Content = styled(CardChip)`
@@ -43,6 +48,9 @@ const Caption = styled.div`
   justify-content: space-between;
   ${Typography} {
     font-weight: 700;
+  }
+  @media (max-height: 680px) {
+    flex-direction: column;
   }
 `;
 

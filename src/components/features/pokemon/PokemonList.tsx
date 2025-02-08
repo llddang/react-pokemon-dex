@@ -1,23 +1,45 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { SetStateAction, useEffect, useRef } from "react";
 import PokemonListS from "@/components/features/pokemon/PokemonList.styled";
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
-import useWindowWidth from "@/lib/hooks/useWindowWidth";
+import { useGridColumnCount } from "@/lib/hooks/useGridColumCount";
 import { POKEMON_DATA } from "@/mocks";
 
-export default function PokemonList() {
-  const [selectedIdx, setSelectedIdx] = useState(1);
+export interface PokemonListProps {
+  focusedId: number;
+  setFocusedId: React.Dispatch<SetStateAction<number>>;
+}
+
+export default function PokemonList({
+  focusedId,
+  setFocusedId,
+}: PokemonListProps) {
+  const { gridRef, columnCount } = useGridColumnCount();
   const innerContainerRef = useRef<HTMLDivElement>(null);
-  const windowWidth = useWindowWidth();
   const maxIdx = POKEMON_DATA.length;
 
   function handleArrowKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    e.preventDefault();
     switch (e.key) {
+      case "D":
+      case "d":
       case "ArrowRight":
-        return setSelectedIdx((prev) => (prev + 1 <= maxIdx ? prev + 1 : 1));
+        return setFocusedId((prev) => (prev + 1 <= maxIdx ? prev + 1 : 1));
+      case "A":
+      case "a":
       case "ArrowLeft":
-        return setSelectedIdx((prev) => (prev - 1 > 0 ? prev - 1 : maxIdx));
+        return setFocusedId((prev) => (prev - 1 > 0 ? prev - 1 : maxIdx));
+      case "W":
+      case "w":
+      case "ArrowUp":
+        return setFocusedId(
+          (prev) => (prev + maxIdx - columnCount) % maxIdx || maxIdx
+        );
+      case "S":
+      case "s":
+      case "ArrowDown":
+        return setFocusedId((prev) => (prev + columnCount) % maxIdx || maxIdx);
       case "Enter":
-        console.log("enter !!");
+        // TODO: 뭔가 하기.
         break;
       default:
         break;
@@ -29,7 +51,7 @@ export default function PokemonList() {
     if (!card) return;
 
     const id = Number(card.getAttribute("href")?.split("/").at(-1));
-    setSelectedIdx(id);
+    setFocusedId(id);
   }
 
   useEffect(() => {
@@ -37,11 +59,10 @@ export default function PokemonList() {
   }, [innerContainerRef]);
 
   useEffect(() => {
-    const columnCount = windowWidth > 640 ? (windowWidth > 1024 ? 6 : 4) : 2;
     if (innerContainerRef.current)
       innerContainerRef.current.scrollTop =
-        Math.floor((selectedIdx - 1) / columnCount) * 200;
-  }, [selectedIdx, windowWidth]);
+        Math.floor((focusedId - 1) / columnCount) * 200;
+  }, [focusedId, columnCount]);
 
   return (
     <PokemonListS.Container
@@ -50,13 +71,13 @@ export default function PokemonList() {
       onBlur={() => innerContainerRef.current?.focus()}
       onMouseMove={handleCardHover}
     >
-      <PokemonListS.Grid>
+      <PokemonListS.Grid ref={gridRef}>
         {POKEMON_DATA.map((pokemon) => (
           <PokemonCard
             key={pokemon.id}
             pokemon={pokemon}
             cardType="ADD"
-            isSelected={selectedIdx === pokemon.id}
+            isSelected={focusedId === pokemon.id}
           />
         ))}
       </PokemonListS.Grid>

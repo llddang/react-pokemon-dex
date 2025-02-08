@@ -18,15 +18,12 @@ const Container = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   justify-items: center;
-  row-gap: 30px;
-  ${media.md`
-    grid-template-columns: repeat(4, 1fr);
-  `}
-  ${media.lg`
-    grid-template-columns: repeat(6, 1fr);
-  `}
+  gap: 30px;
+  @media (max-height: 680px) {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
 `;
 
 const PokemonListS = {
