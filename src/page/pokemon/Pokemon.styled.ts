@@ -13,12 +13,19 @@ const Container = styled.main`
   ${media.sm`
     gap: 10px;
   `}
+  @media (max-height: 680px) {
+    padding: 20px;
+    gap: 10px;
+  }
 `;
 
 const Title = styled(Typography).attrs({ $variant: "h1" })`
   font-family: "Galmuri9";
   color: #4ceef9;
   text-align: center;
+  @media (max-height: 680px) {
+    font-size: 22px;
+  }
 `;
 
 const PokemonPageS = {
