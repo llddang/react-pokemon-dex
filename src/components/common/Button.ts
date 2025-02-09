@@ -26,6 +26,16 @@ const buttonStyles = {
         color: white;
       }
     `,
+    ghost: (color: ThemeColors) => css`
+      background-color: transparent;
+      color: ${({ theme }) => theme.colors[color]};
+      border: none;
+      &:hover {
+        background-color: ${({ theme }) =>
+          theme.colors[`${color}Hover` as ThemeColors]};
+        color: white;
+      }
+    `,
   },
   sizes: {
     sm: css`
