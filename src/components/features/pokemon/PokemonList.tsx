@@ -1,12 +1,15 @@
 import React, { SetStateAction, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PokemonMobilePad from "@/components/features/pokemon/PokemonMobilePad";
 import PokemonListS from "@/components/features/pokemon/PokemonList.styled";
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
 import { useGridColumnCount } from "@/lib/hooks/useGridColumCount";
-import { RootState } from "@/store/redux";
 import { addPokemon, deletePokemon } from "@/store/pokemon.slice";
+import { RootState } from "@/store/redux";
 import { MAX_POKEMON_COUNT } from "@/constants";
 import { POKEMON_DATA } from "@/mocks";
+
+import { createExecuteKeyAction, getKeyMapping } from "@/types/keyAction.type";
 
 export interface PokemonListProps {
   focusedId: number;
@@ -27,47 +30,33 @@ export default function PokemonList({
       ? { ...p, isChose: true }
       : { ...p, isChose: false }
   );
-  const maxIdx = pokemonsWithSelect.length;
+  const maxId = pokemonsWithSelect.at(-1)?.id || 0;
+
+  const executeKeyAction = createExecuteKeyAction(
+    maxId,
+    columnCount,
+    setFocusedId,
+    handleEnterAction
+  );
 
   function handleArrowKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     e.preventDefault();
-    switch (e.key) {
-      case "D":
-      case "d":
-      case "ArrowRight":
-        return setFocusedId((prev) => (prev + 1 <= maxIdx ? prev + 1 : 1));
-      case "A":
-      case "a":
-      case "ArrowLeft":
-        return setFocusedId((prev) => (prev - 1 > 0 ? prev - 1 : maxIdx));
-      case "W":
-      case "w":
-      case "ArrowUp":
-        return setFocusedId(
-          (prev) => (prev + maxIdx - columnCount) % maxIdx || maxIdx
-        );
-      case "S":
-      case "s":
-      case "ArrowDown":
-        return setFocusedId((prev) => (prev + columnCount) % maxIdx || maxIdx);
-      case "Enter":
-        return storePokemon();
-      default:
-        break;
-    }
+
+    const actionKey = getKeyMapping(e.key);
+    if (!actionKey) return;
+    executeKeyAction(actionKey);
   }
 
-  function storePokemon() {
+  function handleEnterAction() {
     const focusedPokemon = pokemonsWithSelect.find((p) => p.id === focusedId);
     if (!focusedPokemon) return;
 
-    if (!focusedPokemon.isChose) {
-      if (chosePokemon.length >= MAX_POKEMON_COUNT)
-        return alert("더 이상 선택할 수 없습니다.");
-      return dispatch(addPokemon(focusedPokemon));
-    } else {
+    if (!focusedPokemon.isChose)
       return dispatch(deletePokemon(focusedPokemon.id));
-    }
+
+    if (chosePokemon.length >= MAX_POKEMON_COUNT)
+      return alert("더 이상 선택할 수 없습니다.");
+    return dispatch(addPokemon(focusedPokemon));
   }
 
   function handleCardHover(e: React.MouseEvent<HTMLDivElement>) {
@@ -99,12 +88,17 @@ export default function PokemonList({
           <PokemonCard
             key={pokemon.id}
             pokemon={pokemon}
-            cardType="ADD"
             isChose={pokemon.isChose}
             isFocused={focusedId === pokemon.id}
           />
         ))}
       </PokemonListS.Grid>
+      <PokemonListS.PadLayout>
+        <PokemonMobilePad
+          executeKeyAction={executeKeyAction}
+          focusedId={focusedId}
+        />
+      </PokemonListS.PadLayout>
     </PokemonListS.Container>
   );
 }

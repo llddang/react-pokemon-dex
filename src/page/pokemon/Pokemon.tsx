@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 export default function Pokemon() {
   const { state } = useLocation();
-  const [focusedId, setFocusedId] = useState<number>(state.focusedId ?? 1);
+  const [focusedId, setFocusedId] = useState<number>(state?.focusedId ?? 1);
 
   return (
     <PokemonPageS.Container>

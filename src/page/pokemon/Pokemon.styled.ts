@@ -3,10 +3,12 @@ import media from "@/styles/media";
 import styled from "styled-components";
 
 const Container = styled.main`
+  position: relative;
   height: 100%;
-  overflow: hidden;
   margin: auto;
   padding: 30px;
+  overflow: hidden;
+
   display: flex;
   flex-direction: column;
   gap: 20px;
