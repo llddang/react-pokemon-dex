@@ -15,10 +15,7 @@ const Container = styled.div`
 
 const GridBox = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  ${media.md`
-    grid-template-columns: repeat(6, 1fr);
-  `}
+  grid-template-columns: repeat(6, 1fr);
 `;
 
 const PokemonLink = styled(Link)`
@@ -29,10 +26,10 @@ const PokemonLink = styled(Link)`
   border: 3px solid #888;
   overflow: hidden;
 
-  @media (max-height: 680px) {
+  ${media.mobileHeight`
     width: 30px;
     height: 30px;
-  }
+  `}
 
   > img {
     width: 100%;
@@ -49,11 +46,11 @@ const EmptyImg = styled.img`
   padding: 10px;
   overflow: hidden;
 
-  @media (max-height: 680px) {
+  ${media.mobileHeight`
     width: 30px;
     height: 30px;
     padding: 5px;
-  }
+  `}
 `;
 
 const PokemonDashboardS = {

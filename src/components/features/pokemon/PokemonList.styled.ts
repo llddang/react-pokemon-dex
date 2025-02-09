@@ -21,9 +21,9 @@ const Grid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   justify-items: center;
   gap: 30px;
-  @media (max-height: 680px) {
+  ${media.mobileHeight` 
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  }
+  `}
 `;
 
 const PokemonListS = {

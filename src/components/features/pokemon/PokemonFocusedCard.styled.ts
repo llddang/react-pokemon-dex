@@ -1,3 +1,4 @@
+import { breakpoints } from "@/styles/media";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -5,7 +6,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media (max-height: 680px), (max-width: 680px) {
+  @media (${breakpoints.mobileHeight}), (${breakpoints.sm}) {
     display: none;
   }
 `;
