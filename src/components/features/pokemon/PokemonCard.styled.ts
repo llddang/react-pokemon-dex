@@ -5,6 +5,7 @@ import media from "@/styles/media";
 import CardChip from "@/components/common/CardChip";
 
 interface ContainerProps {
+  $isChose: boolean;
   $isFocused: boolean;
 }
 const Container = styled(Link)<ContainerProps>`
@@ -14,8 +15,8 @@ const Container = styled(Link)<ContainerProps>`
   transition: 0.3s ease;
 
   ${media.sm` width: 100px `}
-  ${(props) =>
-    props.$isFocused &&
+  ${({ $isFocused }) =>
+    $isFocused &&
     `
       transform: scale(110%);
       && > svg {  
@@ -23,6 +24,14 @@ const Container = styled(Link)<ContainerProps>`
         box-shadow: #4ceef9 2px 4px 12px;
       }
       `};
+  ${({ $isChose }) =>
+    $isChose &&
+    `
+      && > svg {  
+        border: 2px solid red;
+        box-shadow: red 2px 4px 12px;
+      }
+      `}
 
   ${media.mobileHeight` 
     width: 80px;

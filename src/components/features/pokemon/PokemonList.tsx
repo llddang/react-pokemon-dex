@@ -24,8 +24,8 @@ export default function PokemonList({
 
   const pokemonsWithSelect = POKEMON_DATA.map((p) =>
     chosePokemon.some((cp) => cp.id === p.id)
-      ? { ...p, isSelected: true }
-      : { ...p, isSelected: false }
+      ? { ...p, isChose: true }
+      : { ...p, isChose: false }
   );
   const maxIdx = pokemonsWithSelect.length;
 
@@ -61,7 +61,7 @@ export default function PokemonList({
     const focusedPokemon = pokemonsWithSelect.find((p) => p.id === focusedId);
     if (!focusedPokemon) return;
 
-    if (!focusedPokemon.isSelected) {
+    if (!focusedPokemon.isChose) {
       if (chosePokemon.length >= MAX_POKEMON_COUNT)
         return alert("더 이상 선택할 수 없습니다.");
       return dispatch(addPokemon(focusedPokemon));
@@ -100,7 +100,7 @@ export default function PokemonList({
             key={pokemon.id}
             pokemon={pokemon}
             cardType="ADD"
-            isSelected={pokemon.isSelected}
+            isChose={pokemon.isChose}
             isFocused={focusedId === pokemon.id}
           />
         ))}

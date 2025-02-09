@@ -7,11 +7,15 @@ import { Pokemon } from "@/types/pokemon.dto";
 interface PokemonCardProps {
   pokemon: Pokemon;
   cardType: "ADD" | "DELETE";
-  isSelected: boolean;
+  isChose: boolean;
   isFocused: boolean;
 }
 
-export default function PokemonCard({ pokemon, isFocused }: PokemonCardProps) {
+export default function PokemonCard({
+  pokemon,
+  isChose,
+  isFocused,
+}: PokemonCardProps) {
   const navigate = useNavigate();
 
   function handleGoDetailButtonClick(e: React.MouseEvent<HTMLAnchorElement>) {
@@ -25,6 +29,7 @@ export default function PokemonCard({ pokemon, isFocused }: PokemonCardProps) {
   return (
     <PokemonCardS.Container
       $isFocused={isFocused}
+      $isChose={isChose}
       to={`/pokemon/detail/${pokemon.id}`}
       onClick={handleGoDetailButtonClick}
     >
