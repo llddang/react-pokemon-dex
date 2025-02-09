@@ -1,11 +1,12 @@
 import React, { SetStateAction, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PokemonListS from "@/components/features/pokemon/PokemonList.styled";
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
 import { useGridColumnCount } from "@/lib/hooks/useGridColumCount";
-import { POKEMON_DATA } from "@/mocks";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/redux";
 import { addPokemon, deletePokemon } from "@/store/pokemon.slice";
+import { MAX_POKEMON_COUNT } from "@/constants";
+import { POKEMON_DATA } from "@/mocks";
 
 export interface PokemonListProps {
   focusedId: number;
@@ -61,7 +62,8 @@ export default function PokemonList({
     if (!focusedPokemon) return;
 
     if (!focusedPokemon.isSelected) {
-      if (chosePokemon.length >= 6) return alert("더 이상 선택할 수 없습니다.");
+      if (chosePokemon.length >= MAX_POKEMON_COUNT)
+        return alert("더 이상 선택할 수 없습니다.");
       return dispatch(addPokemon(focusedPokemon));
     } else {
       return dispatch(deletePokemon(focusedPokemon.id));
