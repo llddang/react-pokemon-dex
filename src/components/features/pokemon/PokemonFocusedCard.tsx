@@ -15,7 +15,7 @@ export default function PokemonFocusedCard({
 
   return (
     <PokemonFocusedCardS.Container>
-      <PokemonFocusedCardS.Image src={focusedPokemon?.imageUrl} />
+      <PokemonFocusedCardS.Image src={focusedPokemon.imageUrl} />
       <PokemonFocusedCardS.Caption>
         <Typography>No. {formatNumber(focusedPokemon.id)}</Typography>
         <Typography>{focusedPokemon.name}</Typography>
