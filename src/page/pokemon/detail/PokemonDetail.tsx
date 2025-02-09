@@ -14,7 +14,7 @@ export default function PokemonDetail() {
 
   const handleBack = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    navigate(-1);
+    navigate("/pokemon", { state });
   };
 
   useEffect(() => {

@@ -2,9 +2,12 @@ import PokemonPageS from "@/page/pokemon/Pokemon.styled";
 import PokemonList from "@/components/features/pokemon/PokemonList";
 import { useState } from "react";
 import PokemonDashboard from "@/components/features/pokemon/PokemonDashboard";
+import { useLocation } from "react-router-dom";
 
 export default function Pokemon() {
-  const [focusedId, setFocusedId] = useState<number>(1);
+  const { state } = useLocation();
+  const [focusedId, setFocusedId] = useState<number>(state.focusedId ?? 1);
+
   return (
     <PokemonPageS.Container>
       <PokemonPageS.Title>choose your Pokémon</PokemonPageS.Title>

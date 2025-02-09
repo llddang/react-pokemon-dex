@@ -18,7 +18,7 @@ export default function PokemonCard({ pokemon, isFocused }: PokemonCardProps) {
     e.preventDefault();
 
     navigate(`/pokemon/detail/${pokemon.id}`, {
-      state: { selectedId: pokemon.id },
+      state: { focusedId: pokemon.id },
     });
   }
 
