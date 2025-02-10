@@ -39,6 +39,7 @@ export default function PokemonList({
   );
 
   function handleArrowKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    e.preventDefault();
     const actionKey = getKeyMapping(e.key);
     if (!actionKey) return;
     executeKeyAction(actionKey);
