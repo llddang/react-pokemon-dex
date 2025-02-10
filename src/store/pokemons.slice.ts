@@ -3,8 +3,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: Pokemon[] = [];
 
-const pokemonSlice = createSlice({
-  name: "pokemon",
+const pokemonsSlice = createSlice({
+  name: "pokemons",
   initialState,
   reducers: {
     addPokemon: (state, action: PayloadAction<Pokemon>) => {
@@ -15,5 +15,5 @@ const pokemonSlice = createSlice({
   },
 });
 
-export const { addPokemon, deletePokemon } = pokemonSlice.actions;
-export default pokemonSlice.reducer;
+export const { addPokemon, deletePokemon } = pokemonsSlice.actions;
+export default pokemonsSlice.reducer;

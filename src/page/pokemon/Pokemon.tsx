@@ -1,21 +1,19 @@
-import styled from "styled-components";
-import PokemonDashboard from "@/components/features/pokemon/PokemonDashboard";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import PokemonPageS from "@/page/pokemon/Pokemon.styled";
 import PokemonList from "@/components/features/pokemon/PokemonList";
+import PokemonDashboard from "@/components/features/pokemon/PokemonDashboard";
 
 export default function Pokemon() {
+  const { state } = useLocation();
+  const [focusedId, setFocusedId] = useState<number>(state?.focusedId ?? 1);
+
   return (
-    <Container>
-      <PokemonDashboard />
-      <PokemonList />
-    </Container>
+    <PokemonPageS.Container>
+      <PokemonPageS.Title>choose your Pokémon</PokemonPageS.Title>
+      <hr />
+      <PokemonList focusedId={focusedId} setFocusedId={setFocusedId} />
+      <PokemonDashboard focusedId={focusedId} setFocusedId={setFocusedId} />
+    </PokemonPageS.Container>
   );
 }
-
-const Container = styled.div`
-  max-width: 1200px;
-  margin: auto;
-  padding: 30px;
-  > *:not(:last-child) {
-    margin-bottom: 30px;
-  }
-`;

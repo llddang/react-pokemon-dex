@@ -1,9 +1,9 @@
 export const theme = {
   colors: {
-    primary: "#ff0000",
-    secondary: "#8f9fb0",
-    primaryHover: "#8b0000",
-    secondaryHover: "#708090",
+    primary: "#168991",
+    secondary: "white",
+    primaryHover: "#4CEEF9",
+    secondaryHover: "#4CEEF9",
   },
 } as const;
 

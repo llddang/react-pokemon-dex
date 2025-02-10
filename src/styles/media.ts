@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { css, type CSSObject, type Interpolation } from "styled-components";
 
-export type Breakpoints = "sm" | "md" | "lg";
+export type Breakpoints = "sm" | "md" | "lg" | "mobileHeight";
 
 export const breakpoints: Record<Breakpoints, string> = {
-  sm: "@media (max-width: 640px)",
-  md: "@media (min-width: 640px)",
-  lg: "@media (min-width: 1024px)",
+  sm: "max-width: 640px",
+  md: "min-width: 640px",
+  lg: "min-width: 1024px",
+  mobileHeight: "max-height: 640px",
 } as const;
 
 const media = Object.entries(breakpoints).reduce((acc, [key, value]) => {
@@ -16,7 +17,7 @@ const media = Object.entries(breakpoints).reduce((acc, [key, value]) => {
       first: CSSObject | TemplateStringsArray,
       ...interpolations: Interpolation<object>[]
     ) => css`
-      ${value} {
+      @media (${value}) {
         ${css(first, ...interpolations)}
       }
     `,
