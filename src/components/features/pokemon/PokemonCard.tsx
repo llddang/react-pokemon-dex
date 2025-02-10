@@ -1,3 +1,4 @@
+import React from "react";
 import Typography from "@/components/common/Typography";
 import PokemonCardS from "@/components/features/pokemon/PokemonCard.styled";
 import { formatNumber } from "@/lib/utils/format.util";
@@ -9,7 +10,7 @@ interface PokemonCardProps extends React.HTMLAttributes<HTMLDivElement> {
   isFocused: boolean;
 }
 
-export default function PokemonCard({
+function PokemonCard({
   pokemon,
   isChose,
   isFocused,
@@ -31,3 +32,5 @@ export default function PokemonCard({
     </PokemonCardS.Container>
   );
 }
+
+export default React.memo(PokemonCard);

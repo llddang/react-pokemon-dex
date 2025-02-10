@@ -1,4 +1,4 @@
-import { SetStateAction } from "react";
+import { POKEMON_DATA } from "@/mocks";
 
 export const KeyAction = {
   UP: "UP",
@@ -27,23 +27,32 @@ export function getKeyMapping(key: string): KeyActionType | null {
 
 export function executeKeyAction(
   key: KeyActionType,
-  maxId: number,
   column: number,
-  setFocusedId: React.Dispatch<SetStateAction<number>>,
-  onEnterAction: () => void
+  focusedId: number,
+  updateFocusedPokemon: (id: number) => void,
+  togglePokemon: (id: number) => void
 ) {
+  const maxId = POKEMON_DATA.at(-1)?.id ?? -1;
+  let nextFocusedId = -1;
   switch (key) {
     case KeyAction.RIGHT:
-      return setFocusedId((prev) => (prev + 1 <= maxId ? prev + 1 : 1));
+      nextFocusedId = focusedId + 1 <= maxId ? focusedId + 1 : 1;
+      break;
     case KeyAction.LEFT:
-      return setFocusedId((prev) => (prev - 1 > 0 ? prev - 1 : maxId));
+      nextFocusedId = focusedId - 1 > 0 ? focusedId - 1 : maxId;
+      break;
     case KeyAction.UP:
-      return setFocusedId((prev) => (prev + maxId - column) % maxId || maxId);
+      nextFocusedId = (focusedId + maxId - column) % maxId || maxId;
+      break;
     case KeyAction.DOWN:
-      return setFocusedId((prev) => (prev + column) % maxId || maxId);
+      nextFocusedId = (focusedId + column) % maxId || maxId;
+      break;
     case KeyAction.ENTER:
-      return onEnterAction();
+      return togglePokemon(focusedId);
     default:
       break;
   }
+
+  if (nextFocusedId === -1) return;
+  updateFocusedPokemon(nextFocusedId);
 }
