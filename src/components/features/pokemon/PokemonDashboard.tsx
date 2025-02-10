@@ -64,7 +64,7 @@ export default function PokemonDashboard({
           {restPokemons.reverse().map((key) => (
             <PokemonDashboardS.EmptyImg
               key={key}
-              src="/public/pokemon_ball.png"
+              src="/pokemon_ball.png"
               alt="포켓몬 볼"
             />
           ))}
