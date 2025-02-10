@@ -4,18 +4,20 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
-  align-items: baseline;
+  align-items: end;
   justify-content: end;
   gap: 10px;
   ${media.sm`
     flex-direction: column-reverse;
     align-items: center;
+    text-align: center;
   `}
 `;
 
 const GridBox = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  margin-bottom: 10px;
 `;
 
 const PokemonLink = styled(Link)`
@@ -53,11 +55,19 @@ const EmptyImg = styled.img`
   `}
 `;
 
+const Buttons = styled.div`
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+  ${media.sm` justify-content: center; `}
+`;
+
 const PokemonDashboardS = {
   Container,
   GridBox,
   PokemonLink,
   EmptyImg,
+  Buttons,
 };
 
 export default PokemonDashboardS;

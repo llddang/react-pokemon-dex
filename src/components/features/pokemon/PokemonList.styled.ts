@@ -26,15 +26,8 @@ const Grid = styled.div`
   `}
 `;
 
-const PadLayout = styled.div`
-  position: absolute;
-  left: 30px;
-  bottom: 30px;
-`;
-
 const PokemonListS = {
   Container,
   Grid,
-  PadLayout,
 };
 export default PokemonListS;

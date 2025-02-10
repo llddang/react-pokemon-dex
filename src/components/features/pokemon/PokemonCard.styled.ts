@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Typography from "@/components/common/Typography";
 import media from "@/styles/media";
@@ -8,7 +7,7 @@ interface ContainerProps {
   $isChose: boolean;
   $isFocused: boolean;
 }
-const Container = styled(Link)<ContainerProps>`
+const Container = styled.div<ContainerProps>`
   width: 130px;
   height: 170px;
   -webkit-transition: 0.3s ease;

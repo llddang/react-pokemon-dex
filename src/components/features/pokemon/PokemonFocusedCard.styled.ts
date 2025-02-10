@@ -1,4 +1,4 @@
-import { breakpoints } from "@/styles/media";
+import media from "@/styles/media";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -6,13 +6,13 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media (${breakpoints.mobileHeight}), (${breakpoints.sm}) {
+  ${media.sm`
     display: none;
-  }
+  `}
 `;
 
 const Image = styled.img`
-  width: 200px;
+  width: 160px;
   filter: drop-shadow(0 0 2px #4ceef9);
 `;
 

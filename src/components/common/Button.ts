@@ -6,12 +6,13 @@ const buttonStyles = {
   base: css`
     cursor: pointer;
     transition: all 0.2s;
+    border: 2px solid transparent;
   `,
   variants: {
     solid: (color: ThemeColors) => css`
       background-color: ${({ theme }) => theme.colors[color]};
       color: white;
-      border: none;
+      border-color: ${({ theme }) => theme.colors[color]};
       &:hover {
         background-color: ${({ theme }) =>
           theme.colors[`${color}Hover` as ThemeColors]};
@@ -20,16 +21,16 @@ const buttonStyles = {
     outline: (color: ThemeColors) => css`
       background-color: transparent;
       color: ${({ theme }) => theme.colors[color]};
-      border: 2px solid currentColor;
+      border-color: ${({ theme }) => theme.colors[color]};
       &:hover {
-        background-color: ${({ theme }) => theme.colors[color]};
+        background-color: ${({ theme }) =>
+          theme.colors[`${color}Hover` as ThemeColors]};
         color: white;
       }
     `,
     ghost: (color: ThemeColors) => css`
       background-color: transparent;
       color: ${({ theme }) => theme.colors[color]};
-      border: none;
       &:hover {
         background-color: ${({ theme }) =>
           theme.colors[`${color}Hover` as ThemeColors]};

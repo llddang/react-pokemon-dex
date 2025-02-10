@@ -1,6 +1,5 @@
 import React, { SetStateAction, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PokemonMobilePad from "@/components/features/pokemon/PokemonMobilePad";
 import PokemonListS from "@/components/features/pokemon/PokemonList.styled";
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
 import { useGridColumnCount } from "@/lib/hooks/useGridColumCount";
@@ -40,8 +39,6 @@ export default function PokemonList({
   );
 
   function handleArrowKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
-    e.preventDefault();
-
     const actionKey = getKeyMapping(e.key);
     if (!actionKey) return;
     executeKeyAction(actionKey);
@@ -50,8 +47,8 @@ export default function PokemonList({
   function handleEnterAction() {
     const focusedPokemon = pokemonsWithSelect.find((p) => p.id === focusedId);
     if (!focusedPokemon) return;
-
-    if (!focusedPokemon.isChose)
+    console.log(focusedPokemon.isChose);
+    if (focusedPokemon.isChose)
       return dispatch(deletePokemon(focusedPokemon.id));
 
     if (chosePokemon.length >= MAX_POKEMON_COUNT)
@@ -59,12 +56,12 @@ export default function PokemonList({
     return dispatch(addPokemon(focusedPokemon));
   }
 
-  function handleCardHover(e: React.MouseEvent<HTMLDivElement>) {
-    const card = (e.target as HTMLElement).closest("a");
+  function handleCardClick(e: React.MouseEvent<HTMLDivElement>) {
+    const card = (e.target as HTMLElement).closest('[id^="pokemon-card-"]');
     if (!card) return;
 
-    const id = Number(card.getAttribute("href")?.split("/").at(-1));
-    setFocusedId(id);
+    const pokemonId = Number(card.id.split("-").at(-1));
+    setFocusedId(pokemonId);
   }
 
   useEffect(() => {
@@ -83,22 +80,17 @@ export default function PokemonList({
       onKeyDown={handleArrowKeyDown}
       onBlur={() => innerContainerRef.current?.focus()}
     >
-      <PokemonListS.Grid ref={gridRef} onMouseMove={handleCardHover}>
+      <PokemonListS.Grid ref={gridRef} onClick={handleCardClick}>
         {pokemonsWithSelect.map((pokemon) => (
           <PokemonCard
             key={pokemon.id}
             pokemon={pokemon}
             isChose={pokemon.isChose}
             isFocused={focusedId === pokemon.id}
+            id={`pokemon-card-${pokemon.id}`}
           />
         ))}
       </PokemonListS.Grid>
-      <PokemonListS.PadLayout>
-        <PokemonMobilePad
-          executeKeyAction={executeKeyAction}
-          focusedId={focusedId}
-        />
-      </PokemonListS.PadLayout>
     </PokemonListS.Container>
   );
 }

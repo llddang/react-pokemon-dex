@@ -1,10 +1,13 @@
 import React, { SetStateAction } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PokemonDashboardS from "@/components/features/pokemon/PokemonDashboard.styled";
 import PokemonFocusedCard from "@/components/features/pokemon/PokemonFocusedCard";
 import { RootState } from "@/store/redux";
 import { MAX_POKEMON_COUNT } from "@/constants";
-import { useNavigate } from "react-router-dom";
+import ButtonLink from "@/components/common/ButtonLink";
+import Button from "@/components/common/Button";
+import { addPokemon, deletePokemon } from "@/store/pokemon.slice";
+import { POKEMON_DATA } from "@/mocks";
 
 export interface PokemonDashboardProps {
   focusedId: number;
@@ -15,13 +18,15 @@ export default function PokemonDashboard({
   focusedId,
   setFocusedId,
 }: PokemonDashboardProps) {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const chosePokemons = useSelector((state: RootState) => state.pokemon);
   const restPokemons = Array.from(
     { length: MAX_POKEMON_COUNT - chosePokemons.length },
     (_, i) => i
   );
+  const pokemon = POKEMON_DATA.find((p) => p.id === focusedId);
+  const isChose = chosePokemons.some((cp) => cp.id === focusedId);
 
   function handleChosePokemonHover(e: React.MouseEvent<HTMLDivElement>) {
     const chosePokemon = (e.target as HTMLElement).closest("a");
@@ -30,36 +35,44 @@ export default function PokemonDashboard({
     setFocusedId(pokemonId);
   }
 
-  function handleChosePokemonClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
-    const pokemonLinkId = (e.currentTarget as HTMLElement).id;
-    const pokemonId = Number(pokemonLinkId.split("-").at(-1));
-    navigate(`/pokemon/detail/${pokemonId}`, {
-      state: { focusedId: pokemonId },
-    });
+  function handleActionPokemonClick() {
+    if (!pokemon) return;
+    if (isChose) return dispatch(deletePokemon(pokemon.id));
+    if (chosePokemons.length >= MAX_POKEMON_COUNT)
+      return alert("더 이상 선택할 수 없습니다.");
+    return dispatch(addPokemon(pokemon));
   }
 
   return (
     <PokemonDashboardS.Container>
-      <PokemonDashboardS.GridBox onMouseMove={handleChosePokemonHover}>
-        {chosePokemons.map((p) => (
-          <PokemonDashboardS.PokemonLink
-            key={p.id}
-            id={`chose-pokemon-${p.id}`}
-            to={`/pokemon/detail/${p.id}`}
-            onClick={handleChosePokemonClick}
-          >
-            <img src={p.imageUrl} alt={p.name} />
-          </PokemonDashboardS.PokemonLink>
-        ))}
-        {restPokemons.reverse().map((key) => (
-          <PokemonDashboardS.EmptyImg
-            key={key}
-            src="/public/pokemon_ball.png"
-            alt="포켓몬 볼"
-          />
-        ))}
-      </PokemonDashboardS.GridBox>
+      <div>
+        <PokemonDashboardS.GridBox onMouseMove={handleChosePokemonHover}>
+          {chosePokemons.map((p) => (
+            <PokemonDashboardS.PokemonLink
+              key={p.id}
+              id={`chose-pokemon-${p.id}`}
+              to={`/pokemon/detail/${p.id}`}
+            >
+              <img src={p.imageUrl} alt={p.name} />
+            </PokemonDashboardS.PokemonLink>
+          ))}
+          {restPokemons.reverse().map((key) => (
+            <PokemonDashboardS.EmptyImg
+              key={key}
+              src="/public/pokemon_ball.png"
+              alt="포켓몬 볼"
+            />
+          ))}
+        </PokemonDashboardS.GridBox>
+        <PokemonDashboardS.Buttons>
+          <Button onClick={handleActionPokemonClick}>
+            {isChose ? "제거하기" : "추가하기"}
+          </Button>
+          <ButtonLink href={`/pokemon/detail/${focusedId}`} $variant="outline">
+            상세보기
+          </ButtonLink>
+        </PokemonDashboardS.Buttons>
+      </div>
       <PokemonFocusedCard focusedId={focusedId} />
     </PokemonDashboardS.Container>
   );

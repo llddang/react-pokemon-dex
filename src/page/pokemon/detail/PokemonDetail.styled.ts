@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.main`
   width: 60%;
-  height: 100%;
-  padding: 30px 10px;
+  padding: 30px;
   text-align: center;
 
   > *:not(:last-child) {
@@ -26,14 +25,14 @@ const Title = styled.div`
 `;
 
 const Body = styled.div`
-  min-height: fit-content;
-  height: 30%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   & > img {
-    min-height: 160px;
-    height: 100%;
+    min-width: 160px;
+    width: 100%;
+    max-width: 350px;
   }
 `;
 
