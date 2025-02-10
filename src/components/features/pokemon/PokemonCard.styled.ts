@@ -31,11 +31,6 @@ const Container = styled.div<ContainerProps>`
         box-shadow: red 2px 4px 12px;
       }
       `}
-
-  ${media.mobileHeight` 
-    width: 80px;
-    height: 120px;
-  `}
 `;
 
 const Content = styled(CardChip)`
@@ -57,9 +52,6 @@ const Caption = styled.div`
   ${Typography} {
     font-weight: 700;
   }
-  ${media.mobileHeight`
-    flex-direction: column;
-  `}
 `;
 
 const PokemonCardS = {

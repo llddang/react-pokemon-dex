@@ -28,11 +28,6 @@ const PokemonLink = styled(Link)`
   border: 3px solid #888;
   overflow: hidden;
 
-  ${media.mobileHeight`
-    width: 30px;
-    height: 30px;
-  `}
-
   > img {
     width: 100%;
     height: 100%;
@@ -47,12 +42,6 @@ const EmptyImg = styled.img`
   border: 3px solid #888;
   padding: 10px;
   overflow: hidden;
-
-  ${media.mobileHeight`
-    width: 30px;
-    height: 30px;
-    padding: 5px;
-  `}
 `;
 
 const Buttons = styled.div`

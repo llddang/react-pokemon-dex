@@ -25,7 +25,7 @@ export default function PokemonDashboard({
     { length: MAX_POKEMON_COUNT - chosePokemons.length },
     (_, i) => i
   );
-  const pokemon = POKEMON_DATA.find((p) => p.id === focusedId);
+  const focusedPokemon = POKEMON_DATA.find((p) => p.id === focusedId);
   const isChose = chosePokemons.some((cp) => cp.id === focusedId);
 
   function handleChosePokemonHover(e: React.MouseEvent<HTMLDivElement>) {
@@ -36,11 +36,11 @@ export default function PokemonDashboard({
   }
 
   function handleActionPokemonClick() {
-    if (!pokemon) return;
-    if (isChose) return dispatch(deletePokemon(pokemon.id));
+    if (!focusedPokemon) return;
+    if (isChose) return dispatch(deletePokemon(focusedPokemon.id));
     if (chosePokemons.length >= MAX_POKEMON_COUNT)
       return alert("더 이상 선택할 수 없습니다.");
-    return dispatch(addPokemon(pokemon));
+    return dispatch(addPokemon(focusedPokemon));
   }
 
   return (

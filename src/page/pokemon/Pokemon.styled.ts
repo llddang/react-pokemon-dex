@@ -15,10 +15,6 @@ const Container = styled.main`
   ${media.sm`
     gap: 10px;
   `}
-  ${media.mobileHeight` 
-    padding: 20px;
-    gap: 10px;
-  `}
   > hr {
     width: 100%;
     border-color: #4ceef9;
@@ -29,9 +25,6 @@ const Title = styled(Typography).attrs({ $variant: "h1" })`
   font-family: "Galmuri9";
   color: #4ceef9;
   text-align: center;
-  ${media.mobileHeight` 
-    font-size: 22px;
-  `}
 `;
 
 const PokemonPageS = {
