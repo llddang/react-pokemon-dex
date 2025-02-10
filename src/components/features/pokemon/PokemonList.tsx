@@ -21,11 +21,11 @@ export default function PokemonList({
 }: PokemonListProps) {
   const { gridRef, columnCount } = useGridColumnCount();
   const innerContainerRef = useRef<HTMLDivElement>(null);
-  const chosePokemon = useSelector((state: RootState) => state.pokemon);
+  const chosePokemons = useSelector((state: RootState) => state.pokemon);
   const dispatch = useDispatch();
 
   const pokemonsWithSelect = POKEMON_DATA.map((p) =>
-    chosePokemon.some((cp) => cp.id === p.id)
+    chosePokemons.some((cp) => cp.id === p.id)
       ? { ...p, isChose: true }
       : { ...p, isChose: false }
   );
@@ -47,11 +47,10 @@ export default function PokemonList({
   function handleEnterAction() {
     const focusedPokemon = pokemonsWithSelect.find((p) => p.id === focusedId);
     if (!focusedPokemon) return;
-    console.log(focusedPokemon.isChose);
+
     if (focusedPokemon.isChose)
       return dispatch(deletePokemon(focusedPokemon.id));
-
-    if (chosePokemon.length >= MAX_POKEMON_COUNT)
+    if (chosePokemons.length >= MAX_POKEMON_COUNT)
       return alert("더 이상 선택할 수 없습니다.");
     return dispatch(addPokemon(focusedPokemon));
   }

@@ -19,6 +19,10 @@ const Container = styled.main`
     padding: 20px;
     gap: 10px;
   `}
+  > hr {
+    width: 100%;
+    border-color: #4ceef9;
+  }
 `;
 
 const Title = styled(Typography).attrs({ $variant: "h1" })`
