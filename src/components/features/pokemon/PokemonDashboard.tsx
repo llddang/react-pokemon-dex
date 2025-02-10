@@ -1,12 +1,13 @@
 import React, { SetStateAction } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import PokemonDashboardS from "@/components/features/pokemon/PokemonDashboard.styled";
 import PokemonFocusedCard from "@/components/features/pokemon/PokemonFocusedCard";
-import { RootState } from "@/store/redux";
-import { MAX_POKEMON_COUNT } from "@/constants";
 import ButtonLink from "@/components/common/ButtonLink";
 import Button from "@/components/common/Button";
+import { RootState } from "@/store/redux";
 import { addPokemon, deletePokemon } from "@/store/pokemons.slice";
+import { MAX_POKEMON_COUNT } from "@/constants";
 import { POKEMON_DATA } from "@/mocks";
 
 export interface PokemonDashboardProps {
@@ -37,10 +38,14 @@ export default function PokemonDashboard({
 
   function handleActionPokemonClick() {
     if (!focusedPokemon) return;
-    if (isChose) return dispatch(deletePokemon(focusedPokemon.id));
+    if (isChose) {
+      dispatch(deletePokemon(focusedPokemon.id));
+      return toast.info(`${focusedPokemon.name} 아(야), 잘 가!`);
+    }
     if (chosePokemons.length >= MAX_POKEMON_COUNT)
-      return alert("더 이상 선택할 수 없습니다.");
-    return dispatch(addPokemon(focusedPokemon));
+      return toast.error("더 이상 선택할 수 없습니다.");
+    dispatch(addPokemon(focusedPokemon));
+    return toast.info(`와! ${focusedPokemon.name} 을(를) 포획했다!`);
   }
 
   return (

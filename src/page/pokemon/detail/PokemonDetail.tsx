@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import Typography from "@/components/common/Typography";
 import ButtonLink from "@/components/common/ButtonLink";
 import Button from "@/components/common/Button";
@@ -14,7 +15,7 @@ import { POKEMON_DATA } from "@/mocks";
 export default function PokemonDetail() {
   const pokemonId = Number(useParams().id);
   const pokemon = POKEMON_DATA.find((pokemon) => pokemon.id === pokemonId);
-  const chosePokemon = useSelector((state: RootState) => state.pokemons);
+  const chosePokemons = useSelector((state: RootState) => state.pokemons);
   const dispatch = useDispatch();
   const maxId = POKEMON_DATA.at(-1)?.id || 0;
 
@@ -24,14 +25,18 @@ export default function PokemonDetail() {
     navigate(-1);
     return null;
   }
-  const isChose = chosePokemon.some((cp) => cp.id === pokemon.id);
+  const isChose = chosePokemons.some((cp) => cp.id === pokemon.id);
 
   function handleActionPokemonClick() {
     if (!pokemon) return;
-    if (isChose) return dispatch(deletePokemon(pokemon.id));
-    if (chosePokemon.length >= MAX_POKEMON_COUNT)
-      return alert("더 이상 선택할 수 없습니다.");
-    return dispatch(addPokemon(pokemon));
+    if (isChose) {
+      dispatch(deletePokemon(pokemon.id));
+      return toast.info(`${pokemon.name} 아(야), 잘 가!`);
+    }
+    if (chosePokemons.length >= MAX_POKEMON_COUNT)
+      return toast.error("더 이상 선택할 수 없습니다.");
+    dispatch(addPokemon(pokemon));
+    return toast.info(`와! ${pokemon.name} 을(를) 포획했다!`);
   }
 
   function handleDexLinkButtonClick(e: React.MouseEvent<HTMLAnchorElement>) {

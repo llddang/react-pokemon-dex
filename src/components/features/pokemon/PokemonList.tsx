@@ -1,5 +1,6 @@
 import React, { SetStateAction, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import PokemonListS from "@/components/features/pokemon/PokemonList.styled";
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
 import { useGridColumnCount } from "@/lib/hooks/useGridColumCount";
@@ -49,11 +50,14 @@ export default function PokemonList({
     const focusedPokemon = pokemonsWithSelect.find((p) => p.id === focusedId);
     if (!focusedPokemon) return;
 
-    if (focusedPokemon.isChose)
-      return dispatch(deletePokemon(focusedPokemon.id));
+    if (focusedPokemon.isChose) {
+      dispatch(deletePokemon(focusedPokemon.id));
+      return toast.info(`${focusedPokemon.name} 아(야), 잘 가!`);
+    }
     if (chosePokemons.length >= MAX_POKEMON_COUNT)
-      return alert("더 이상 선택할 수 없습니다.");
-    return dispatch(addPokemon(focusedPokemon));
+      return toast.error("더 이상 선택할 수 없습니다.");
+    dispatch(addPokemon(focusedPokemon));
+    return toast.info(`와! ${focusedPokemon.name} 을(를) 포획했다!`);
   }
 
   function handleCardClick(e: React.MouseEvent<HTMLDivElement>) {
