@@ -13,11 +13,11 @@ const publicRoutes: RouteObject[] = [
     element: <Home />,
   },
   {
-    path: "/pokemon",
+    path: "pokemon",
     element: <Pokemon />,
   },
   {
-    path: "/pokemon/detail/:id",
+    path: "pokemon/detail/:id",
     element: <PokemonDetail />,
   },
 ];
