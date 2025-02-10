@@ -13,6 +13,13 @@ const typographyStyles = {
         font-size: 2.125rem;
     `}
     `,
+    h2: css`
+      font-size: 1.5rem;
+      font-weight: 700;
+      ${media.md`
+        font-size: 1.875rem;
+    `}
+    `,
     h3: css`
       font-size: 1.25rem;
       font-weight: 600;
