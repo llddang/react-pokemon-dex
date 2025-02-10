@@ -11,7 +11,7 @@ interface PokemonActionButtonsProps {
 export default function PokemonActionButtons({
   pokemonId,
 }: PokemonActionButtonsProps) {
-  const { isChose, handlePokemonStoreAction } = usePokemonsStore();
+  const { isChose, togglePokemon } = usePokemonsStore();
 
   const navigate = useNavigate();
   function handleDexLinkButtonClick(e: React.MouseEvent<HTMLAnchorElement>) {
@@ -21,7 +21,7 @@ export default function PokemonActionButtons({
 
   return (
     <Buttons>
-      <Button onClick={() => handlePokemonStoreAction(pokemonId)}>
+      <Button onClick={() => togglePokemon(pokemonId)}>
         {isChose(pokemonId) ? "제거하기" : "추가하기"}
       </Button>
       <ButtonLink onClick={handleDexLinkButtonClick} $variant="outline">

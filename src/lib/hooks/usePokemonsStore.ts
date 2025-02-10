@@ -9,7 +9,7 @@ export default function usePokemonsStore() {
   const chosePokemons = useSelector((state: RootState) => state.pokemons);
   const dispatch = useDispatch();
 
-  function handlePokemonStoreAction(pokemonId: number) {
+  function togglePokemon(pokemonId: number) {
     const pokemon = POKEMON_DATA.find((p) => p.id === pokemonId);
     if (!pokemon) return;
 
@@ -28,5 +28,5 @@ export default function usePokemonsStore() {
     return chosePokemons.some((cp) => cp.id === pokemonId);
   }
 
-  return { chosePokemons, handlePokemonStoreAction, isChose };
+  return { chosePokemons, togglePokemon, isChose };
 }
