@@ -26,7 +26,7 @@
 }
 
 body {
-  background: url("/public/background_galaxy.png");
+  background: url("/background_galaxy.png");
   background-repeat: no-repeat;
   background-size: cover;
 }

@@ -9,7 +9,7 @@ import { RootState } from "@/store/redux";
 import { MAX_POKEMON_COUNT } from "@/constants";
 import { POKEMON_DATA } from "@/mocks";
 
-import { createExecuteKeyAction, getKeyMapping } from "@/types/keyAction.type";
+import { executeKeyAction, getKeyMapping } from "@/types/keyAction.type";
 
 export interface PokemonListProps {
   focusedId: number;
@@ -32,18 +32,17 @@ export default function PokemonList({
   );
   const maxId = pokemonsWithSelect.at(-1)?.id || 0;
 
-  const executeKeyAction = createExecuteKeyAction(
-    maxId,
-    columnCount,
-    setFocusedId,
-    handleEnterAction
-  );
-
   function handleArrowKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     e.preventDefault();
     const actionKey = getKeyMapping(e.key);
     if (!actionKey) return;
-    executeKeyAction(actionKey);
+    executeKeyAction(
+      actionKey,
+      maxId,
+      columnCount,
+      setFocusedId,
+      handleEnterAction
+    );
   }
 
   function handleEnterAction() {
