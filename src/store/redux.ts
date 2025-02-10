@@ -1,16 +1,16 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
-import pokemonReducer from "@/store/pokemon.slice";
+import pokemonsReducer from "@/store/pokemons.slice";
 import localStorage from "redux-persist/lib/storage";
 
 const persistConfig = {
   key: "root",
   storage: localStorage,
-  whitelist: ["pokemon"],
+  whitelist: ["pokemons"],
 };
 
 export const rootReducer = combineReducers({
-  pokemon: pokemonReducer,
+  pokemons: pokemonsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -6,7 +6,7 @@ import { RootState } from "@/store/redux";
 import { MAX_POKEMON_COUNT } from "@/constants";
 import ButtonLink from "@/components/common/ButtonLink";
 import Button from "@/components/common/Button";
-import { addPokemon, deletePokemon } from "@/store/pokemon.slice";
+import { addPokemon, deletePokemon } from "@/store/pokemons.slice";
 import { POKEMON_DATA } from "@/mocks";
 
 export interface PokemonDashboardProps {
@@ -20,7 +20,7 @@ export default function PokemonDashboard({
 }: PokemonDashboardProps) {
   const dispatch = useDispatch();
 
-  const chosePokemons = useSelector((state: RootState) => state.pokemon);
+  const chosePokemons = useSelector((state: RootState) => state.pokemons);
   const restPokemons = Array.from(
     { length: MAX_POKEMON_COUNT - chosePokemons.length },
     (_, i) => i

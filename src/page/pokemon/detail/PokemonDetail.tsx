@@ -5,7 +5,7 @@ import Typography from "@/components/common/Typography";
 import ButtonLink from "@/components/common/ButtonLink";
 import Button from "@/components/common/Button";
 import PokemonDetailS from "@/page/pokemon/detail/PokemonDetail.styled";
-import { addPokemon, deletePokemon } from "@/store/pokemon.slice";
+import { addPokemon, deletePokemon } from "@/store/pokemons.slice";
 import { RootState } from "@/store/redux";
 import { formatNumber } from "@/lib/utils/format.util";
 import { MAX_POKEMON_COUNT } from "@/constants";
@@ -14,7 +14,7 @@ import { POKEMON_DATA } from "@/mocks";
 export default function PokemonDetail() {
   const pokemonId = Number(useParams().id);
   const pokemon = POKEMON_DATA.find((pokemon) => pokemon.id === pokemonId);
-  const chosePokemon = useSelector((state: RootState) => state.pokemon);
+  const chosePokemon = useSelector((state: RootState) => state.pokemons);
   const dispatch = useDispatch();
   const maxId = POKEMON_DATA.at(-1)?.id || 0;
 

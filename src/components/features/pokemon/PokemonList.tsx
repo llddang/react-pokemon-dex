@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PokemonListS from "@/components/features/pokemon/PokemonList.styled";
 import PokemonCard from "@/components/features/pokemon/PokemonCard";
 import { useGridColumnCount } from "@/lib/hooks/useGridColumCount";
-import { addPokemon, deletePokemon } from "@/store/pokemon.slice";
+import { addPokemon, deletePokemon } from "@/store/pokemons.slice";
 import { RootState } from "@/store/redux";
 import { MAX_POKEMON_COUNT } from "@/constants";
 import { POKEMON_DATA } from "@/mocks";
@@ -21,7 +21,7 @@ export default function PokemonList({
 }: PokemonListProps) {
   const { gridRef, columnCount } = useGridColumnCount();
   const innerContainerRef = useRef<HTMLDivElement>(null);
-  const chosePokemons = useSelector((state: RootState) => state.pokemon);
+  const chosePokemons = useSelector((state: RootState) => state.pokemons);
   const dispatch = useDispatch();
 
   const pokemonsWithSelect = POKEMON_DATA.map((p) =>
