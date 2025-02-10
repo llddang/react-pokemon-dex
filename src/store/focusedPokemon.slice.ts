@@ -8,7 +8,7 @@ const focusedPokemonSlice = createSlice({
   name: "focusedPokemon",
   initialState,
   reducers: {
-    updatePokemon: (state, action: PayloadAction<Pokemon>) => action.payload,
+    updatePokemon: (_state, action: PayloadAction<Pokemon>) => action.payload,
   },
 });
 
