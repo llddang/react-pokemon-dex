@@ -6,7 +6,7 @@ export default function Home() {
     <HomeContainer>
       <div>
         <img src="/pokemon_logo.png" alt="포켓몬 로고" />
-        <ButtonLink $size="lg" $rounded="xl" href="pokemon">
+        <ButtonLink $size="lg" $rounded="xl" to="pokemon">
           포켓몬 도감 시작하기
         </ButtonLink>
       </div>

@@ -49,7 +49,7 @@ export default function PokemonDashboard() {
             {isChose(focusedPokemon.id) ? "제거하기" : "추가하기"}
           </Button>
           <ButtonLink
-            href={`/pokemon/detail/${focusedPokemon.id}`}
+            to={`/pokemon/detail/${focusedPokemon.id}`}
             $variant="outline"
           >
             상세보기

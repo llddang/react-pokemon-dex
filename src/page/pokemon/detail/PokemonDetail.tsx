@@ -43,7 +43,7 @@ export default function PokemonDetail() {
       </PokemonDetailS.Head>
       <PokemonDetailS.Body>
         <ButtonLink
-          href={`/pokemon/detail/${pokemonId - 1 || maxId}`}
+          to={`/pokemon/detail/${pokemonId - 1 || maxId}`}
           $variant="ghost"
           $color="secondary"
         >
@@ -51,7 +51,7 @@ export default function PokemonDetail() {
         </ButtonLink>
         <img src={pokemon.imageUrl} alt={pokemon.name} />
         <ButtonLink
-          href={`/pokemon/detail/${(pokemonId + 1) % maxId || maxId}`}
+          to={`/pokemon/detail/${(pokemonId + 1) % maxId || maxId}`}
           $variant="ghost"
           $color="secondary"
         >

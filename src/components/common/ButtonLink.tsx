@@ -1,10 +1,10 @@
 import Button, { ButtonProps } from "@/components/common/Button";
+import { Link, LinkProps } from "react-router-dom";
 
-type ButtonLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
-  ButtonProps;
+type ButtonLinkProps = LinkProps & ButtonProps;
 export default function ButtonLink({ children, ...props }: ButtonLinkProps) {
   return (
-    <Button as="a" {...props}>
+    <Button as={Link} {...props}>
       {children}
     </Button>
   );

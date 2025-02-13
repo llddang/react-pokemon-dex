@@ -17,7 +17,7 @@ export default function PokemonActionButtons({
       <Button onClick={() => togglePokemon(pokemonId)}>
         {isChose(pokemonId) ? "제거하기" : "추가하기"}
       </Button>
-      <ButtonLink href="/pokemon" $variant="outline">
+      <ButtonLink to="/pokemon" $variant="outline">
         뒤로가기
       </ButtonLink>
     </Buttons>
